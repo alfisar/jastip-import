@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/alfisar/jastip-import/domain"
-	"github.com/alfisar/jastip-import/internal/errorhandler"
+	"github.com/alfisar/jastip-import/helpers/errorhandler"
 
 	"golang.org/x/crypto/bcrypt"
 )

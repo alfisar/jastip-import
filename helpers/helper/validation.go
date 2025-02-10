@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/alfisar/jastip-import/domain"
-	validator "github.com/alfisar/jastip-import/internal/validation"
+	validator "github.com/alfisar/jastip-import/helpers/validation"
 
 	validation "github.com/go-ozzo/ozzo-validation"
 )

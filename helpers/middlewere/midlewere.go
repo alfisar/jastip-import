@@ -9,11 +9,11 @@ import (
 
 	"github.com/alfisar/jastip-import/application/redis/repository"
 	"github.com/alfisar/jastip-import/config"
-	"github.com/alfisar/jastip-import/internal/consts"
-	"github.com/alfisar/jastip-import/internal/errorhandler"
-	"github.com/alfisar/jastip-import/internal/helper"
-	"github.com/alfisar/jastip-import/internal/jwthandler"
-	"github.com/alfisar/jastip-import/internal/response"
+	"github.com/alfisar/jastip-import/helpers/consts"
+	"github.com/alfisar/jastip-import/helpers/errorhandler"
+	"github.com/alfisar/jastip-import/helpers/helper"
+	"github.com/alfisar/jastip-import/helpers/jwthandler"
+	"github.com/alfisar/jastip-import/helpers/response"
 
 	"github.com/gofiber/fiber/v2"
 )

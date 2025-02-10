@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/alfisar/jastip-import/domain"
-	"github.com/alfisar/jastip-import/internal/helper"
+	"github.com/alfisar/jastip-import/helpers/helper"
 
 	"github.com/gofiber/fiber/v2"
 )
