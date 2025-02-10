@@ -2,8 +2,9 @@ package validations
 
 import (
 	"fmt"
-	"jastip-import/internal/consts"
 	"regexp"
+
+	"github.com/alfisar/jastip-import/internal/consts"
 
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"

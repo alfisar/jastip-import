@@ -2,17 +2,18 @@ package middlewere
 
 import (
 	"errors"
-	"jastip-import/application/redis/repository"
-	"jastip-import/config"
-	"jastip-import/internal/consts"
-	"jastip-import/internal/errorhandler"
-	"jastip-import/internal/helper"
-	"jastip-import/internal/jwthandler"
-	"jastip-import/internal/response"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/alfisar/jastip-import/application/redis/repository"
+	"github.com/alfisar/jastip-import/config"
+	"github.com/alfisar/jastip-import/internal/consts"
+	"github.com/alfisar/jastip-import/internal/errorhandler"
+	"github.com/alfisar/jastip-import/internal/helper"
+	"github.com/alfisar/jastip-import/internal/jwthandler"
+	"github.com/alfisar/jastip-import/internal/response"
 
 	"github.com/gofiber/fiber/v2"
 )

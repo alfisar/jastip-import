@@ -1,9 +1,10 @@
 package response
 
 import (
-	"jastip-import/domain"
-	"jastip-import/internal/helper"
 	"os"
+
+	"github.com/alfisar/jastip-import/domain"
+	"github.com/alfisar/jastip-import/internal/helper"
 
 	"github.com/gofiber/fiber/v2"
 )

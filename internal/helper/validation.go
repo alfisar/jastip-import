@@ -2,9 +2,10 @@ package helper
 
 import (
 	"fmt"
-	"jastip-import/domain"
-	validator "jastip-import/internal/validation"
 	"strconv"
+
+	"github.com/alfisar/jastip-import/domain"
+	validator "github.com/alfisar/jastip-import/internal/validation"
 
 	validation "github.com/go-ozzo/ozzo-validation"
 )

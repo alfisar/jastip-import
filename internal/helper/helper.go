@@ -2,8 +2,9 @@ package helper
 
 import (
 	"fmt"
-	"jastip-import/domain"
 	"strconv"
+
+	"github.com/alfisar/jastip-import/domain"
 
 	"gopkg.in/gomail.v2"
 )

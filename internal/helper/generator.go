@@ -8,9 +8,10 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
-	"jastip-import/domain"
-	"jastip-import/internal/errorhandler"
 	"time"
+
+	"github.com/alfisar/jastip-import/domain"
+	"github.com/alfisar/jastip-import/internal/errorhandler"
 
 	"golang.org/x/crypto/bcrypt"
 )

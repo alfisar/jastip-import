@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"jastip-import/domain"
+	"github.com/alfisar/jastip-import/domain"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -1,4 +1,4 @@
-module jastip-import
+module github.com/alfisar/jastip-import
 
 go 1.20
 

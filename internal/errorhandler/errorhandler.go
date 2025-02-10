@@ -1,7 +1,7 @@
 package errorhandler
 
 import (
-	"jastip-import/domain"
+	"github.com/alfisar/jastip-import/domain"
 
 	"github.com/valyala/fasthttp"
 )
