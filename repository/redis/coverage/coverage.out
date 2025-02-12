@@ -1,0 +1,26 @@
+mode: set
+jastip/application/redis/repository/redis_repository.go:14.44,16.2 1 1
+jastip/application/redis/repository/redis_repository.go:18.130,19.15 1 1
+jastip/application/redis/repository/redis_repository.go:19.15,20.31 1 1
+jastip/application/redis/repository/redis_repository.go:20.31,22.4 1 0
+jastip/application/redis/repository/redis_repository.go:26.2,26.17 1 1
+jastip/application/redis/repository/redis_repository.go:26.17,29.3 2 1
+jastip/application/redis/repository/redis_repository.go:31.2,32.20 2 1
+jastip/application/redis/repository/redis_repository.go:32.20,35.3 2 0
+jastip/application/redis/repository/redis_repository.go:37.2,37.8 1 1
+jastip/application/redis/repository/redis_repository.go:40.110,41.15 1 1
+jastip/application/redis/repository/redis_repository.go:41.15,42.31 1 1
+jastip/application/redis/repository/redis_repository.go:42.31,44.4 1 0
+jastip/application/redis/repository/redis_repository.go:48.2,48.17 1 1
+jastip/application/redis/repository/redis_repository.go:48.17,51.3 2 1
+jastip/application/redis/repository/redis_repository.go:53.2,55.23 2 1
+jastip/application/redis/repository/redis_repository.go:55.23,58.3 2 1
+jastip/application/redis/repository/redis_repository.go:60.2,61.8 2 1
+jastip/application/redis/repository/redis_repository.go:64.98,65.15 1 1
+jastip/application/redis/repository/redis_repository.go:65.15,66.31 1 1
+jastip/application/redis/repository/redis_repository.go:66.31,68.4 1 0
+jastip/application/redis/repository/redis_repository.go:72.2,72.17 1 1
+jastip/application/redis/repository/redis_repository.go:72.17,75.3 2 1
+jastip/application/redis/repository/redis_repository.go:77.2,79.20 2 1
+jastip/application/redis/repository/redis_repository.go:79.20,82.3 2 0
+jastip/application/redis/repository/redis_repository.go:84.2,84.8 1 1
