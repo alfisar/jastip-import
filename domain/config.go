@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	"github.com/go-redis/redis/v8"
-	"github.com/minio/minio-go"
+	"github.com/minio/minio-go/v7"
 	"gorm.io/gorm"
 )
 
