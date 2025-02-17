@@ -146,3 +146,15 @@ func ValidateMappingData(data any, key string, errs error, rules validation.Rule
 
 	return
 }
+
+func ValidationPostSchedule(data domain.TravelSchRequest) (err error) {
+
+	err = validation.ValidateStruct(
+		&data,
+		validation.Field(&data.Location, validator.Required, validator.AlphanumericPetik),
+		validation.Field(&data.PeriodEnd, validator.Required),
+		validation.Field(&data.PeriodStart, validator.Required),
+	)
+
+	return
+}
