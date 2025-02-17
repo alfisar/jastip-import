@@ -65,3 +65,13 @@ func HandlerpostAddress(c *fiber.Ctx) (map[string]any, error) {
 
 	return request, nil
 }
+
+func HandlerPostSchedule(c *fiber.Ctx) (domain.TravelSchRequest, error) {
+	request := domain.TravelSchRequest{}
+	errData := c.BodyParser(&request)
+	if errData != nil {
+		return request, errData
+	}
+
+	return request, nil
+}
