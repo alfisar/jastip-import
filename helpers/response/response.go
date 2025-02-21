@@ -23,6 +23,14 @@ type MetaData struct {
 	Token     string `json:"token,omitempty"`
 }
 
+type MetaDataPaging struct {
+	Timestamp   string `json:"timestamp"`
+	Version     string `json:"version"`
+	Page        int    `json:"page"`
+	CurrentPage int64  `json:"current_page"`
+	TotalItems  int64  `json:"total_items"`
+}
+
 func ResponseSuccess(data interface{}, message string) Response {
 	return Response{
 		Status:  "success'",
@@ -47,6 +55,23 @@ func ResponseSuccessWithToken(data interface{}, message string, token string) Re
 			Timestamp: helper.TimeGenerator(),
 			Version:   "v1",
 			Token:     token,
+		},
+	}
+
+}
+
+func ResponseSuccessWithPaging(data interface{}, message string, page int, currentPage int64, total int64) Response {
+	return Response{
+		Status:  "success'",
+		Code:    0,
+		Message: message,
+		Data:    data,
+		MetaData: MetaDataPaging{
+			Timestamp:   helper.TimeGenerator(),
+			Version:     "v1",
+			Page:        page,
+			CurrentPage: currentPage,
+			TotalItems:  total,
 		},
 	}
 
