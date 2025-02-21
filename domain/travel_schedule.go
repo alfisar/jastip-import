@@ -14,4 +14,5 @@ type TravelSchResponse struct {
 	Location    string `gorm:"column:locations" json:"location"`
 	PeriodStart string `gorm:"column:period_start" json:"period_start"`
 	PeriodEnd   string `gorm:"column:period_end" json:"period_end"`
+	Status      int    `gorm:"status" json:"status"`
 }
