@@ -82,12 +82,12 @@ func HandlerPostSchedule(c *fiber.Ctx) (domain.TravelSchRequest, error) {
 func HandlerParamSch(c *fiber.Ctx) (domain.Params, error) {
 	errMessage := ""
 
-	page, err := strconv.Atoi(c.Params("page"))
+	page, err := strconv.Atoi(c.Query("page"))
 	if err != nil {
 		errMessage = "page tidak valid"
 	}
 
-	limit, err := strconv.Atoi(c.Params("limit"))
+	limit, err := strconv.Atoi(c.Query("limit"))
 	if err != nil {
 		if errMessage != "" {
 			errMessage += ", limit tidak valid"
@@ -97,7 +97,7 @@ func HandlerParamSch(c *fiber.Ctx) (domain.Params, error) {
 
 	}
 
-	status, err := strconv.Atoi(c.Params("status"))
+	status, err := strconv.Atoi(c.Query("status"))
 	if err != nil {
 		if errMessage != "" {
 			errMessage += ", status tidak valid"
@@ -114,7 +114,7 @@ func HandlerParamSch(c *fiber.Ctx) (domain.Params, error) {
 	return domain.Params{
 		Page:   page,
 		Limit:  limit,
-		Search: c.Params("search"),
+		Search: c.Query("search"),
 		Status: status,
 	}, nil
 }
