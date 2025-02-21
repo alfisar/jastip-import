@@ -1,23 +1,23 @@
 package handler
 
 // CalculateOffsetAndLimit calculates the offset and limit based on the page number and page size
-func CalculateOffsetAndLimit(page, pageSize int) (offset, limit int) {
+func CalculateOffsetAndLimit(page, pageSize int) (pages int, offset int, limit int) {
 	if page < 1 {
-		page = 1
+		pages = 1
 	}
 
 	if pageSize < 1 {
 		pageSize = 10
 	}
 
-	offset = (page - 1) * pageSize
+	offset = (pages - 1) * pageSize
 	if pageSize > 1000 {
 		limit = 1000
 	} else {
 		limit = pageSize
 	}
 
-	return offset, limit
+	return pages, offset, limit
 }
 
 // CalculateTotalPages calculates the total pages based on the number of items and page size
