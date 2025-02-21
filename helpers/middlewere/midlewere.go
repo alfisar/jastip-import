@@ -27,18 +27,20 @@ func Validation[T any](parse func(c *fiber.Ctx) (T, error), validate func(T) err
 	return func(c *fiber.Ctx) error {
 		request, err := parse(c)
 		if err != nil {
-			log.Printf("Error parsing data on  middleware : %s", err.Error())
+			log.Printf("Error parsing data on middleware : %s", err.Error())
 			err := errorhandler.ErrValidation(err)
 			response.WriteResponse(c, response.Response{}, err, fiber.StatusBadRequest)
 			return nil
 		}
 
-		err = validate(request)
-		if err != nil {
-			log.Printf("Error validation data on middleware : %s", err.Error())
-			err := errorhandler.ErrValidation(err)
-			response.WriteResponse(c, response.Response{}, err, fiber.StatusBadRequest)
-			return nil
+		if validate != nil {
+			err = validate(request)
+			if err != nil {
+				log.Printf("Error validation data on middleware : %s", err.Error())
+				err := errorhandler.ErrValidation(err)
+				response.WriteResponse(c, response.Response{}, err, fiber.StatusBadRequest)
+				return nil
+			}
 		}
 
 		c.Locals("validatedData", request)

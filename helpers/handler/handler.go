@@ -1,6 +1,9 @@
 package handler
 
 import (
+	"fmt"
+	"strconv"
+
 	"github.com/alfisar/jastip-import/domain"
 
 	"github.com/gofiber/fiber/v2"
@@ -74,4 +77,44 @@ func HandlerPostSchedule(c *fiber.Ctx) (domain.TravelSchRequest, error) {
 	}
 
 	return request, nil
+}
+
+func HandlerParamSch(c *fiber.Ctx) (domain.Params, error) {
+	errMessage := ""
+
+	page, err := strconv.Atoi(c.Params("page"))
+	if err != nil {
+		errMessage = "page tidak valid"
+	}
+
+	limit, err := strconv.Atoi(c.Params("limit"))
+	if err != nil {
+		if errMessage != "" {
+			errMessage += ", limit tidak valid"
+		} else {
+			errMessage = "limit tidak valid"
+		}
+
+	}
+
+	status, err := strconv.Atoi(c.Params("status"))
+	if err != nil {
+		if errMessage != "" {
+			errMessage += ", status tidak valid"
+		} else {
+			errMessage = "status tidak valid"
+		}
+
+	}
+
+	if errMessage != "" {
+		return domain.Params{}, fmt.Errorf(errMessage)
+	}
+
+	return domain.Params{
+		Page:   page,
+		Limit:  limit,
+		Search: c.Params("search"),
+		Status: status,
+	}, nil
 }
