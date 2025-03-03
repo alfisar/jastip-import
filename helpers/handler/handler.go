@@ -128,3 +128,15 @@ func HandlerUpdate(c *fiber.Ctx) (map[string]any, error) {
 
 	return request, nil
 }
+
+func HandlerPathID(c *fiber.Ctx) (int, error) {
+	errMessage := ""
+
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		errMessage = "id tidak valid"
+		return 0, fmt.Errorf(errMessage)
+	}
+
+	return id, nil
+}

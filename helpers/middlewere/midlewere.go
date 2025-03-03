@@ -23,6 +23,21 @@ type AuthenticateMiddleware struct {
 	jwt *jwthandler.JwtHandler
 }
 
+func ValidationPath[T any](parse func(c *fiber.Ctx) (T, error)) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		path, err := parse(c)
+		if err != nil {
+			log.Printf("Error parsing data on middleware : %s", err.Error())
+			err := errorhandler.ErrValidation(err)
+			response.WriteResponse(c, response.Response{}, err, fiber.StatusBadRequest)
+			return nil
+		}
+
+		c.Locals("path", path)
+		return c.Next()
+	}
+}
+
 func Validation[T any](parse func(c *fiber.Ctx) (T, error), validate func(T) error) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		request, err := parse(c)
