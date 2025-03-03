@@ -158,3 +158,26 @@ func ValidationPostSchedule(data domain.TravelSchRequest) (err error) {
 
 	return
 }
+
+func ValidationUpdateTravelSch(data map[string]any) (err error) {
+	var (
+		rules validation.Rule
+	)
+	allowedKeys := []string{
+		"locations",
+	}
+
+	mappingData := filterRequestBody(data, allowedKeys)
+	if len(mappingData) == 0 {
+		return
+	}
+
+	for key, v := range mappingData {
+
+		rules = validator.AlphanumericSimbols
+
+		err = ValidateMappingData(v, key, err, rules)
+	}
+
+	return
+}
