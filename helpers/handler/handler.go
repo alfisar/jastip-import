@@ -118,3 +118,13 @@ func HandlerParamSch(c *fiber.Ctx) (domain.Params, error) {
 		Status: status,
 	}, nil
 }
+
+func HandlerUpdate(c *fiber.Ctx) (map[string]any, error) {
+	request := map[string]any{}
+	errData := c.BodyParser(&request)
+	if errData != nil {
+		return request, errData
+	}
+
+	return request, nil
+}
