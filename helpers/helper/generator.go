@@ -35,6 +35,13 @@ func Verify(passwordHash string, password string) (err error) {
 	return
 }
 
+func GenerateDateTime(data string) (time.Time, error) {
+	timeParse, err := time.Parse("2006-01-02", data)
+
+	return timeParse, err
+
+}
+
 func TimeGenerator() string {
 	timeNow := time.Now().Format(time.RFC3339)
 	return timeNow
