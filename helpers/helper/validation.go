@@ -1,11 +1,20 @@
 package helper
 
 import (
+	"bytes"
+	"context"
 	"fmt"
+	"image"
+	"mime/multipart"
+	"net/http"
+	"path/filepath"
 	"strconv"
+	"strings"
 
 	"github.com/alfisar/jastip-import/domain"
 	validator "github.com/alfisar/jastip-import/helpers/validation"
+	"github.com/disintegration/imaging"
+	"github.com/minio/minio-go/v7"
 
 	validation "github.com/go-ozzo/ozzo-validation"
 )
@@ -180,4 +189,119 @@ func ValidationUpdateTravelSch(data map[string]any) (err error) {
 	}
 
 	return
+}
+
+func SaveImageMinio(ctx context.Context, config *domain.Config, PathImage string, fileHeader *multipart.FileHeader) (name string, err error) {
+
+	var (
+		pattern string
+		// tempFile *os.File
+		reader              *bytes.Reader
+		file                multipart.File
+		compressedImgBuffer bytes.Buffer
+
+		slicedName []string
+	)
+
+	file, _ = fileHeader.Open()
+	defer file.Close()
+
+	fileSize := fileHeader.Size
+
+	if fileSize > 10*1024*1024 {
+		return name, fmt.Errorf("Invalid size image")
+	} else if fileSize > 1*1024*1024 && fileSize < 5*1024*1024 {
+		img, _, err := image.Decode(file)
+		if err != nil {
+			return name, err
+		}
+
+		for quality := 90; quality > 0; quality = quality - 5 {
+			compressedImgBuffer.Reset()
+			err = imaging.Encode(&compressedImgBuffer, img, imaging.JPEG, imaging.JPEGQuality(quality))
+			if err != nil {
+				return name, err
+			}
+			compressedSize := int(compressedImgBuffer.Len())
+			if int64(compressedSize) <= 1024*1024 {
+				fileSize = int64(compressedSize)
+				break
+			}
+		}
+	}
+
+	switch fileHeader.Header.Values("Content-Type")[0] {
+
+	case validator.ImageJPG, validator.ImageJPEG, validator.ImagePNG: // continue
+	default:
+		return name, validator.ErrInvalidImageType
+	}
+
+	allowedExtensions := []string{".jpg", ".jpeg", ".png"}
+	ext := filepath.Ext(fileHeader.Filename)
+	validExtension := false
+
+	for _, allowedExt := range allowedExtensions {
+		if strings.EqualFold(ext, allowedExt) {
+			validExtension = true
+			break
+		}
+	}
+
+	if !validExtension {
+		return name, validator.ErrInvalidImageType
+	}
+
+	isImage := isImageFile(fileHeader)
+
+	if !isImage {
+		return name, validator.ErrInvalidImageType
+	}
+
+	removeSpace := strings.ReplaceAll(fileHeader.Filename, " ", "")
+	pattern = fmt.Sprintf("*_%s", removeSpace)
+
+	if compressedImgBuffer.Len() > 0 {
+		reader = bytes.NewReader(compressedImgBuffer.Bytes())
+	} else {
+		// Reset file reader karena sudah dibaca sebelumnya
+		_, err := file.Seek(0, 0)
+		if err != nil {
+			return "", err
+		}
+		reader = bytes.NewReader(fileHeaderHeaderToBytes(fileHeader))
+	}
+	_, errData := config.Minio.Client.PutObject(ctx, config.Minio.BucketName, PathImage+pattern, reader, fileSize, minio.PutObjectOptions{})
+
+	if errData != nil {
+		fmt.Println(errData)
+		return "", errData
+	}
+	// return tempFile.Name(), nil
+	return slicedName[len(slicedName)-1], nil
+}
+
+func fileHeaderHeaderToBytes(fh *multipart.FileHeader) []byte {
+	file, _ := fh.Open()
+	defer file.Close()
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(file)
+	return buf.Bytes()
+}
+
+func isImageFile(fileHeader *multipart.FileHeader) bool {
+	file, err := fileHeader.Open()
+	if err != nil {
+		return false
+	}
+	defer file.Close()
+
+	buffer := make([]byte, 512)
+	_, err = file.Read(buffer)
+	if err != nil {
+		return false
+	}
+
+	fileType := http.DetectContentType(buffer)
+	return strings.HasPrefix(fileType, "image/")
 }

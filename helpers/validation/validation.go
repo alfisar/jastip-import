@@ -17,9 +17,9 @@ var (
 	MaxMinChar17              = validation.Length(17, 17).Error(consts.MaxMinChar17)
 	Required                  = validation.Required.Error(consts.RequiredField)
 	Email                     = is.Email.Error(consts.IsEmail)
-	errInvalidImageType error = fmt.Errorf("Format gambar tidak sesuai")
+	ErrInvalidImageType error = fmt.Errorf("Format gambar tidak sesuai")
 
-	imageJPG  string = "image/jpg"
-	imageJPEG string = "image/jpeg"
-	imagePNG  string = "image/png"
+	ImageJPG  string = "image/jpg"
+	ImageJPEG string = "image/jpeg"
+	ImagePNG  string = "image/png"
 )
