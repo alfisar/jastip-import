@@ -10,16 +10,16 @@ import (
 )
 
 type Response struct {
-	Status   string      `json:"status"`
-	Code     int         `json:"code"`
-	Message  string      `json:"message"`
-	Data     interface{} `json:"data"`
+	Status   string      `json:"status"  example:"success"`
+	Code     int         `json:"code" example:"0"`
+	Message  string      `json:"message" example:"Success"`
+	Data     interface{} `json:"data" `
 	MetaData interface{} `json:"metadata"`
 }
 
 type MetaData struct {
-	Timestamp string `json:"timestamp"`
-	Version   string `json:"version"`
+	Timestamp string `json:"timestamp" example:"2006-01-02T15:04:05Z07:00"`
+	Version   string `json:"version" example:"v1"`
 	Token     string `json:"token,omitempty"`
 }
 
