@@ -47,6 +47,7 @@ type ProfileResponse struct {
 
 type AddressResponse struct {
 	Id          int    `gorm:"primaryKey; column:id" json:"id"`
+	Province    string `gorm:"column:province" json:"province"`
 	Street      string `gorm:"column:street" json:"street"`
 	City        string `gorm:"column:city" json:"city"`
 	District    string `gorm:"column:district" json:"district"`
@@ -57,6 +58,7 @@ type AddressResponse struct {
 type AddressRequest struct {
 	Id          int    `gorm:"primaryKey; column:id" json:"id"`
 	UserID      int    `gorm:"column:user_id" json:"user_id"`
+	Province    string `gorm:"column:province" json:"province"`
 	Street      string `gorm:"column:street" json:"street"`
 	City        string `gorm:"column:city" json:"city"`
 	District    string `gorm:"column:district" json:"district"`
