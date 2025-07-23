@@ -119,6 +119,35 @@ func HandlerParamSch(c *fiber.Ctx) (domain.Params, error) {
 	}, nil
 }
 
+func HandlerParamCountries(c *fiber.Ctx) (domain.Params, error) {
+	errMessage := ""
+
+	page, err := strconv.Atoi(c.Query("page"))
+	if err != nil {
+		errMessage = "page tidak valid"
+	}
+
+	limit, err := strconv.Atoi(c.Query("limit"))
+	if err != nil {
+		if errMessage != "" {
+			errMessage += ", limit tidak valid"
+		} else {
+			errMessage = "limit tidak valid"
+		}
+
+	}
+
+	if errMessage != "" {
+		return domain.Params{}, fmt.Errorf(errMessage)
+	}
+
+	return domain.Params{
+		Page:   page,
+		Limit:  limit,
+		Search: c.Query("search"),
+	}, nil
+}
+
 func HandlerUpdate(c *fiber.Ctx) (map[string]any, error) {
 	request := map[string]any{}
 	errData := c.BodyParser(&request)
