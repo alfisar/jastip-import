@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package auth;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "/proto;authpb";
+
+service Auth {
+    rpc CheckRunning(google.protobuf.Empty) returns (Health);
+    rpc AddressByID(RequestAddressByID) returns (ResponseAddressByID);
+}
+
+message Health {
+    string message = 1 ;
+}
+
+message RequestAddressByID {
+    int32 userID = 1;
+    int32 adressID = 2;
+}
+
+message ResponseAddressByID {
+    int32  Id          = 1;
+	string Province    = 2;
+	string Street      = 3;
+	string City        = 4;
+	string District    = 5;
+	string SUbDistrict = 6;
+	string PostalCode  = 7;
+}
