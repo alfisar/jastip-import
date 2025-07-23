@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v5.29.3
-// source: auth.proto
+// source: proto/auth/auth.proto
 
 package authpb
 
@@ -19,124 +19,210 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// AuthClient is the client API for Auth service.
+// SimpleClient is the client API for Simple service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AuthClient interface {
+type SimpleClient interface {
 	CheckRunning(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Health, error)
 	AddressByID(ctx context.Context, in *RequestAddressByID, opts ...grpc.CallOption) (*ResponseAddressByID, error)
 }
 
-type authClient struct {
+type simpleClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAuthClient(cc grpc.ClientConnInterface) AuthClient {
-	return &authClient{cc}
+func NewSimpleClient(cc grpc.ClientConnInterface) SimpleClient {
+	return &simpleClient{cc}
 }
 
-func (c *authClient) CheckRunning(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Health, error) {
+func (c *simpleClient) CheckRunning(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Health, error) {
 	out := new(Health)
-	err := c.cc.Invoke(ctx, "/auth.Auth/CheckRunning", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.Simple/CheckRunning", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authClient) AddressByID(ctx context.Context, in *RequestAddressByID, opts ...grpc.CallOption) (*ResponseAddressByID, error) {
+func (c *simpleClient) AddressByID(ctx context.Context, in *RequestAddressByID, opts ...grpc.CallOption) (*ResponseAddressByID, error) {
 	out := new(ResponseAddressByID)
-	err := c.cc.Invoke(ctx, "/auth.Auth/AddressByID", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.Simple/AddressByID", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AuthServer is the server API for Auth service.
-// All implementations must embed UnimplementedAuthServer
+// SimpleServer is the server API for Simple service.
+// All implementations must embed UnimplementedSimpleServer
 // for forward compatibility
-type AuthServer interface {
+type SimpleServer interface {
 	CheckRunning(context.Context, *emptypb.Empty) (*Health, error)
 	AddressByID(context.Context, *RequestAddressByID) (*ResponseAddressByID, error)
-	mustEmbedUnimplementedAuthServer()
+	mustEmbedUnimplementedSimpleServer()
 }
 
-// UnimplementedAuthServer must be embedded to have forward compatible implementations.
-type UnimplementedAuthServer struct {
+// UnimplementedSimpleServer must be embedded to have forward compatible implementations.
+type UnimplementedSimpleServer struct {
 }
 
-func (UnimplementedAuthServer) CheckRunning(context.Context, *emptypb.Empty) (*Health, error) {
+func (UnimplementedSimpleServer) CheckRunning(context.Context, *emptypb.Empty) (*Health, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckRunning not implemented")
 }
-func (UnimplementedAuthServer) AddressByID(context.Context, *RequestAddressByID) (*ResponseAddressByID, error) {
+func (UnimplementedSimpleServer) AddressByID(context.Context, *RequestAddressByID) (*ResponseAddressByID, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddressByID not implemented")
 }
-func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
+func (UnimplementedSimpleServer) mustEmbedUnimplementedSimpleServer() {}
 
-// UnsafeAuthServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AuthServer will
+// UnsafeSimpleServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SimpleServer will
 // result in compilation errors.
-type UnsafeAuthServer interface {
-	mustEmbedUnimplementedAuthServer()
+type UnsafeSimpleServer interface {
+	mustEmbedUnimplementedSimpleServer()
 }
 
-func RegisterAuthServer(s grpc.ServiceRegistrar, srv AuthServer) {
-	s.RegisterService(&Auth_ServiceDesc, srv)
+func RegisterSimpleServer(s grpc.ServiceRegistrar, srv SimpleServer) {
+	s.RegisterService(&Simple_ServiceDesc, srv)
 }
 
-func _Auth_CheckRunning_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Simple_CheckRunning_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServer).CheckRunning(ctx, in)
+		return srv.(SimpleServer).CheckRunning(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth.Auth/CheckRunning",
+		FullMethod: "/auth.Simple/CheckRunning",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).CheckRunning(ctx, req.(*emptypb.Empty))
+		return srv.(SimpleServer).CheckRunning(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_AddressByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Simple_AddressByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RequestAddressByID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServer).AddressByID(ctx, in)
+		return srv.(SimpleServer).AddressByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth.Auth/AddressByID",
+		FullMethod: "/auth.Simple/AddressByID",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).AddressByID(ctx, req.(*RequestAddressByID))
+		return srv.(SimpleServer).AddressByID(ctx, req.(*RequestAddressByID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
+// Simple_ServiceDesc is the grpc.ServiceDesc for Simple service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Auth_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth.Auth",
-	HandlerType: (*AuthServer)(nil),
+var Simple_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "auth.Simple",
+	HandlerType: (*SimpleServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CheckRunning",
-			Handler:    _Auth_CheckRunning_Handler,
+			Handler:    _Simple_CheckRunning_Handler,
 		},
 		{
 			MethodName: "AddressByID",
-			Handler:    _Auth_AddressByID_Handler,
+			Handler:    _Simple_AddressByID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "auth.proto",
+	Metadata: "proto/auth/auth.proto",
+}
+
+// ProfileClient is the client API for Profile service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProfileClient interface {
+	AddressByID(ctx context.Context, in *RequestAddressByID, opts ...grpc.CallOption) (*ResponseAddressByID, error)
+}
+
+type profileClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProfileClient(cc grpc.ClientConnInterface) ProfileClient {
+	return &profileClient{cc}
+}
+
+func (c *profileClient) AddressByID(ctx context.Context, in *RequestAddressByID, opts ...grpc.CallOption) (*ResponseAddressByID, error) {
+	out := new(ResponseAddressByID)
+	err := c.cc.Invoke(ctx, "/auth.Profile/AddressByID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProfileServer is the server API for Profile service.
+// All implementations must embed UnimplementedProfileServer
+// for forward compatibility
+type ProfileServer interface {
+	AddressByID(context.Context, *RequestAddressByID) (*ResponseAddressByID, error)
+	mustEmbedUnimplementedProfileServer()
+}
+
+// UnimplementedProfileServer must be embedded to have forward compatible implementations.
+type UnimplementedProfileServer struct {
+}
+
+func (UnimplementedProfileServer) AddressByID(context.Context, *RequestAddressByID) (*ResponseAddressByID, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddressByID not implemented")
+}
+func (UnimplementedProfileServer) mustEmbedUnimplementedProfileServer() {}
+
+// UnsafeProfileServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProfileServer will
+// result in compilation errors.
+type UnsafeProfileServer interface {
+	mustEmbedUnimplementedProfileServer()
+}
+
+func RegisterProfileServer(s grpc.ServiceRegistrar, srv ProfileServer) {
+	s.RegisterService(&Profile_ServiceDesc, srv)
+}
+
+func _Profile_AddressByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestAddressByID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServer).AddressByID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/auth.Profile/AddressByID",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServer).AddressByID(ctx, req.(*RequestAddressByID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Profile_ServiceDesc is the grpc.ServiceDesc for Profile service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Profile_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "auth.Profile",
+	HandlerType: (*ProfileServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddressByID",
+			Handler:    _Profile_AddressByID_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/auth/auth.proto",
 }

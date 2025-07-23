@@ -4,10 +4,14 @@ package auth;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "/proto;authpb";
+option go_package = "/proto/auth;authpb";
 
-service Auth {
+service Simple {
     rpc CheckRunning(google.protobuf.Empty) returns (Health);
+    rpc AddressByID(RequestAddressByID) returns (ResponseAddressByID);
+}
+
+service Profile {
     rpc AddressByID(RequestAddressByID) returns (ResponseAddressByID);
 }
 
