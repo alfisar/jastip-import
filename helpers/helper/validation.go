@@ -157,10 +157,10 @@ func ValidateMappingData(data any, key string, errs error, rules validation.Rule
 }
 
 func ValidationPostSchedule(data domain.TravelSchRequest) (err error) {
-
+	dataLocation := strconv.Itoa(data.Location)
 	err = validation.ValidateStruct(
 		&data,
-		validation.Field(&data.Location, validator.Required, validator.Numeric),
+		validation.Field(&dataLocation, validator.Required, validator.Numeric),
 		validation.Field(&data.PeriodEnd, validator.Required),
 		validation.Field(&data.PeriodStart, validator.Required),
 	)
