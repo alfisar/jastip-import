@@ -160,7 +160,7 @@ func ValidationPostSchedule(data domain.TravelSchRequest) (err error) {
 
 	err = validation.ValidateStruct(
 		&data,
-		validation.Field(&data.Location, validator.Required, validator.AlphanumericPetik),
+		validation.Field(&data.Location, validator.Required, validator.Numeric),
 		validation.Field(&data.PeriodEnd, validator.Required),
 		validation.Field(&data.PeriodStart, validator.Required),
 	)
