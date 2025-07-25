@@ -2,6 +2,7 @@ package domain
 
 type ProductData struct {
 	ID       int     `gorm:"id" json:"id"`
+	UserID   int     `gorm:"user_id" json:"user_id"`
 	Name     string  `gorm:"name" json:"name"`
 	Desc     string  `gorm:"desc" json:"desc"`
 	Price    float64 `gorm:"price" json:"price"`
