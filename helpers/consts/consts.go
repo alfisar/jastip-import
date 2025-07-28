@@ -39,4 +39,9 @@ const (
 	// configuration flag
 	Attemp    string = "Attemp_"
 	AttempOTP int    = 5
+
+	// config content type
+	imageJPG  string = "image/jpg"
+	imageJPEG string = "image/jpeg"
+	imagePNG  string = "image/png"
 )
