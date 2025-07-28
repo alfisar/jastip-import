@@ -103,6 +103,12 @@ const (
 
 	// Error message for failed generate token
 	ErrMsgFailedGenerateToken string = "Gagal mendapatkan token"
+
+	// Error message for failed image data
+	ErrInvalidDataImage string = "Invalid image"
+
+	// Error message for failed size image data
+	ErrInvalidDatasizeImage string = "Invalid size image"
 )
 
 func ErrValidation(err error) (result domain.ErrorData) {
