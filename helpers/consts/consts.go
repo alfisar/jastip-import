@@ -41,7 +41,7 @@ const (
 	AttempOTP int    = 5
 
 	// config content type
-	imageJPG  string = "image/jpg"
-	imageJPEG string = "image/jpeg"
-	imagePNG  string = "image/png"
+	ImageJPG  string = "image/jpg"
+	ImageJPEG string = "image/jpeg"
+	ImagePNG  string = "image/png"
 )
