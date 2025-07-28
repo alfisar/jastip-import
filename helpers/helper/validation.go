@@ -199,6 +199,57 @@ func ValidationUpdateTravelSch(data map[string]any) (err error) {
 	return
 }
 
+func ValidationPostProducts(data domain.ProductData) (err error) {
+	dataDummy := struct {
+		Name     string
+		Price    string
+		Quantity string
+	}{
+		Name:     data.Name,
+		Price:    strconv.Itoa(int(data.Price)),
+		Quantity: strconv.Itoa(data.Quantity),
+	}
+	err = validation.ValidateStruct(
+		&dataDummy,
+		validation.Field(&dataDummy.Name, validator.Required, validator.AlphanumericPetik),
+		validation.Field(&dataDummy.Price, validator.Required, validator.Numeric),
+		validation.Field(&dataDummy.Quantity, validator.Required, validator.Numeric),
+	)
+
+	return
+}
+
+func ValidationUpdateProduct(data map[string]any) (err error) {
+	var (
+		rules validation.Rule
+	)
+	allowedKeys := []string{
+		"name",
+		"price",
+		"quantity",
+		"desc",
+		"image",
+	}
+
+	mappingData := filterRequestBody(data, allowedKeys)
+	if len(mappingData) == 0 {
+		return
+	}
+
+	for key, v := range mappingData {
+		rules = &validation.MatchRule{}
+		if key == "price" || key == "quantity" {
+			rules = validator.Numeric
+		} else {
+			rules = validator.AlphanumericPetik
+		}
+
+		err = ValidateMappingData(v, key, err, rules)
+	}
+
+	return
+}
+
 func SaveImageMinio(ctx context.Context, config *domain.Config, PathImage string, fileHeader *multipart.FileHeader) (name string, err error) {
 
 	var (

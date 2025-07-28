@@ -79,6 +79,16 @@ func HandlerPostSchedule(c *fiber.Ctx) (domain.TravelSchRequest, error) {
 	return request, nil
 }
 
+func HandlerPostProducts(c *fiber.Ctx) (domain.ProductData, error) {
+	request := domain.ProductData{}
+	errData := c.BodyParser(&request)
+	if errData != nil {
+		return request, errData
+	}
+
+	return request, nil
+}
+
 func HandlerParamSch(c *fiber.Ctx) (domain.Params, error) {
 	errMessage := ""
 
@@ -145,6 +155,46 @@ func HandlerParamCountries(c *fiber.Ctx) (domain.Params, error) {
 		Page:   page,
 		Limit:  limit,
 		Search: c.Query("search"),
+	}, nil
+}
+
+func HandlerParamProducts(c *fiber.Ctx) (domain.Params, error) {
+	errMessage := ""
+
+	page, err := strconv.Atoi(c.Query("page"))
+	if err != nil {
+		errMessage = "page tidak valid"
+	}
+
+	limit, err := strconv.Atoi(c.Query("limit"))
+	if err != nil {
+		if errMessage != "" {
+			errMessage += ", limit tidak valid"
+		} else {
+			errMessage = "limit tidak valid"
+		}
+
+	}
+
+	status, err := strconv.Atoi(c.Query("status"))
+	if err != nil {
+		if errMessage != "" {
+			errMessage += ", status tidak valid"
+		} else {
+			errMessage = "status tidak valid"
+		}
+
+	}
+
+	if errMessage != "" {
+		return domain.Params{}, fmt.Errorf(errMessage)
+	}
+
+	return domain.Params{
+		Page:   page,
+		Limit:  limit,
+		Search: c.Query("search"),
+		Status: status,
 	}, nil
 }
 
