@@ -208,6 +208,21 @@ func HandlerUpdate(c *fiber.Ctx) (map[string]any, error) {
 	return request, nil
 }
 
+func HandlerUpdateProducts(c *fiber.Ctx) (map[string]any, error) {
+	form, err := c.MultipartForm()
+	if err != nil {
+		return nil, err
+	}
+
+	request := map[string]any{}
+
+	for key, v := range form.Value {
+		request[key] = v[0]
+	}
+
+	return request, nil
+}
+
 func HandlerPathID(c *fiber.Ctx) (int, error) {
 	errMessage := ""
 
