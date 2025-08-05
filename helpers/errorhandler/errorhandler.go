@@ -189,6 +189,18 @@ func ErrUpdateData(err error) (result domain.ErrorData) {
 	return
 }
 
+func ErrDeleteData(err error) (result domain.ErrorData) {
+	result = domain.ErrorData{
+		Status:   "error",
+		Code:     ErrCodeDelete,
+		HTTPCode: fasthttp.StatusBadRequest,
+		Message:  "Failed delete data",
+		Errors:   err.Error(),
+	}
+
+	return
+}
+
 func ErrInvalidLogic(code int, message string, errorData string) (result domain.ErrorData) {
 	result = domain.ErrorData{
 		Status:   "error",
