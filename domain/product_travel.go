@@ -1,13 +1,13 @@
 package domain
 
 type ProductsTravel struct {
-	ID        int `json:"column:id" gorm:"id"`
-	ProductID int `json:"column:product_id" gorm:"product_id"`
-	TravelID  int `json:"column:treveler_schedule_id" gorm:"treveler_schedule_id"`
+	ID        int `json:"id" gorm:"column:id"`
+	ProductID int `json:"product_id" gorm:"column:product_id"`
+	TravelID  int `json:"treveler_schedule_id" gorm:"column:treveler_schedule_id"`
 }
 
 type ProductsTravelRequest struct {
-	ID        int   `json:"column:id" gorm:"id"`
-	ProductID []int `json:"column:product_id" gorm:"products_id"`
-	TravelID  []int `json:"column:treveler_schedule_id" gorm:"treveler_schedules_id"`
+	ID        int   `json:"id" gorm:"column:id"`
+	ProductID []int `json:"product_id" gorm:"column:products_id"`
+	TravelID  []int `json:"treveler_schedule_id" gorm:"column:treveler_schedules_id"`
 }
