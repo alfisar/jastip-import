@@ -89,6 +89,26 @@ func HandlerPostProducts(c *fiber.Ctx) (domain.ProductData, error) {
 	return request, nil
 }
 
+func HandlerPostProductsTravel(c *fiber.Ctx) (domain.ProductsTravelRequest, error) {
+	request := domain.ProductsTravelRequest{}
+	errData := c.BodyParser(&request)
+	if errData != nil {
+		return request, errData
+	}
+
+	return request, nil
+}
+
+func HandlerDeleteProductsTravel(c *fiber.Ctx) (domain.ProductsTravelRequest, error) {
+	request := domain.ProductsTravelRequest{}
+	errData := c.BodyParser(&request)
+	if errData != nil {
+		return request, errData
+	}
+
+	return request, nil
+}
+
 func HandlerParamSch(c *fiber.Ctx) (domain.Params, error) {
 	errMessage := ""
 
