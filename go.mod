@@ -1,13 +1,13 @@
 module github.com/alfisar/jastip-import
 
-go 1.20
+go 1.21
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/disintegration/imaging v1.6.2
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/go-redis/redis/v8 v8.11.5
-	github.com/gofiber/fiber/v2 v2.52.6
+	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/joho/godotenv v1.5.1
 	github.com/minio/minio-go/v7 v7.0.70
 	github.com/valyala/fasthttp v1.58.0
