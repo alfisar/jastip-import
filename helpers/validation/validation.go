@@ -14,6 +14,7 @@ var (
 	AlphanumericSimbols       = validation.Match(regexp.MustCompile(consts.RegexAlphanumericSimbols)).Error(consts.AlphanumericSimbols)
 	AlphanumericPetik         = validation.Match(regexp.MustCompile(consts.RegexAlphanumericPetik)).Error(consts.AlphanumericPetik)
 	Numeric                   = is.Digit.Error(consts.Digit)
+	MaxMinChar913             = validation.Length(9, 13).Error(consts.MaxMinChar913)
 	MaxMinChar17              = validation.Length(17, 17).Error(consts.MaxMinChar17)
 	Required                  = validation.Required.Error(consts.RequiredField)
 	Email                     = is.Email.Error(consts.IsEmail)

@@ -13,6 +13,7 @@ const (
 	Digit                    string = "Kolom harus dengan angka."
 	IsEmail                  string = "kolom harus sesuai kaidah email"
 	MaxMinChar17             string = "Panjang data harus 17 character."
+	MaxMinChar913            string = "Panjang data harus minimal 9 dan maksimal 13 character."
 	RequiredField            string = "Kolom harus di isi"
 
 	// config const redis db

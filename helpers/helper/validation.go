@@ -112,9 +112,11 @@ func ValidationUpdateProfile(data map[string]any) (err error) {
 
 func ValidationAddress(data map[string]any) (err error) {
 	var (
-		rules validation.Rule
+		rules []validation.Rule
 	)
 	allowedKeys := []string{
+		"receiver_name",
+		"receiver_phone",
 		"street",
 		"city",
 		"district",
@@ -127,22 +129,26 @@ func ValidationAddress(data map[string]any) (err error) {
 		err = fmt.Errorf("data cannot empty")
 		return
 	}
+
 	for key, v := range mappingData {
 
 		if key == "postalcode" {
-			rules = validator.Numeric
+			rules = append(rules, validator.Numeric)
+		} else if key == "receiver_phone" {
+			rules = append(rules, validator.MaxMinChar913)
+			rules = append(rules, validator.Numeric)
 		} else {
-			rules = validator.AlphanumericSimbols
+			rules = append(rules, validator.AlphanumericSimbols)
 		}
-		err = ValidateMappingData(v, key, err, rules)
+		err = ValidateMappingData(v, key, err, rules...)
 	}
 
 	return
 }
 
-func ValidateMappingData(data any, key string, errs error, rules validation.Rule) (err error) {
+func ValidateMappingData(data any, key string, errs error, rules ...validation.Rule) (err error) {
 
-	err = validation.Validate(data, rules)
+	err = validation.Validate(data, rules...)
 	if err != nil {
 		err = fmt.Errorf(key + ": " + err.Error())
 		if errs != nil {
