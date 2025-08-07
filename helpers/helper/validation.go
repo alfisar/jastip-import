@@ -133,12 +133,12 @@ func ValidationAddress(data map[string]any) (err error) {
 	for key, v := range mappingData {
 
 		if key == "postalcode" {
-			rules = append(rules, validator.Numeric)
+			rules = []validation.Rule{validator.Numeric}
 		} else if key == "receiver_phone" {
-			rules = append(rules, validator.MaxMinChar913)
-			rules = append(rules, validator.Numeric)
+			rules = []validation.Rule{validator.MaxMinChar913, validator.Numeric}
+
 		} else {
-			rules = append(rules, validator.AlphanumericSimbols)
+			rules = []validation.Rule{validator.AlphanumericSimbols}
 		}
 		err = ValidateMappingData(v, key, err, rules...)
 	}
