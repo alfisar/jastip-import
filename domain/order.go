@@ -21,7 +21,7 @@ type OrderOneResponse struct {
 	PaymentMethod int               `json:"payment_status" gorm:"payment_status"`
 	Travel        TravelSchResponse `json:"travel_schedule" gorm:"travel_schedule"`
 	Address       AddressOrder      `json:"address" gorm:"address"`
-	Product       []ProductData     `json:"products"`
+	Product       []OrderDetail     `json:"products"`
 }
 
 type OrderListResponse struct {
