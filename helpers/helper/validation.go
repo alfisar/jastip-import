@@ -256,6 +256,27 @@ func ValidationUpdateProduct(data map[string]any) (err error) {
 	return
 }
 
+func ValidationPostOrder(data domain.OrderRequest) (err error) {
+	err = validation.ValidateStruct(
+		&data,
+		validation.Field(&data.AddressID, validator.Required),
+		validation.Field(&data.TravelID, validator.Required),
+		validation.Field(&data.PaymentMethod, validator.Required),
+		validation.Field(&data.Price, validator.Required),
+		validation.Field(&data.Product, validator.Required, validation.Each(
+			validation.By(
+				func(value interface{}) error {
+					p := value.(domain.ProductData)
+					return validation.ValidateStruct(&p,
+						validation.Field(&p.ID, validator.Required),
+					)
+				}),
+		)),
+	)
+
+	return
+}
+
 func SaveImageMinio(ctx context.Context, config *domain.Config, PathImage string, fileHeader *multipart.FileHeader) (name string, err error) {
 
 	var (
