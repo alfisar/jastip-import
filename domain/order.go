@@ -12,10 +12,32 @@ type OrderRequest struct {
 	Product       []ProductData `json:"products"`
 }
 
+type OrderOneResponse struct {
+	ID            int               `json:"id" gorm:"id"`
+	Invoice       string            `json:"invoice" gorm:"invoice"`
+	Price         float32           `json:"price" gorm:"price"`
+	Status        int               `json:"status" gorm:"status"`
+	PaymentStatus int               `json:"payment_satatus" gorm:"payment_satatus"`
+	PaymentMethod int               `json:"payment_status" gorm:"payment_status"`
+	Travel        TravelSchResponse `json:"travel_schedule" gorm:"travel_schedule"`
+	Address       AddressOrder      `json:"address" gorm:"address"`
+	Product       []ProductData     `json:"products"`
+}
+
+type OrderListResponse struct {
+	ID      int               `json:"id" gorm:"id"`
+	Invoice string            `json:"invoice" gorm:"invoice"`
+	Price   float32           `json:"price" gorm:"price"`
+	Status  int               `json:"status" gorm:"status"`
+	Travel  TravelSchResponse `json:"travel_schedule" gorm:"travel_schedule"`
+	Address AddressOrder      `json:"address" gorm:"address"`
+}
+
 type OrderData struct {
 	ID            int     `json:"id" gorm:"primaryKey; id"`
 	BuyerID       int     `json:"buyer_id" gorm:"buyer_id"`
 	TravelID      int     `json:"travel_schedule_id" gorm:"travel_schedule_id"`
+	Invoice       string  `json:"invoice" gorm:"invoice"`
 	AddressID     int     `json:"address_id" gorm:"address_id"`
 	Price         float32 `json:"price" gorm:"price"`
 	Status        int     `json:"status" gorm:"status"`
