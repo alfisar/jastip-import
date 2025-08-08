@@ -13,7 +13,7 @@ type OrderRequest struct {
 }
 
 type OrderData struct {
-	ID            int     `json:"id" gorm:"id"`
+	ID            int     `json:"id" gorm:"primaryKey; id"`
 	BuyerID       int     `json:"buyer_id" gorm:"buyer_id"`
 	TravelID      int     `json:"travel_schedule_id" gorm:"travel_schedule_id"`
 	AddressID     int     `json:"address_id" gorm:"address_id"`
