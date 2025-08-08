@@ -45,4 +45,7 @@ const (
 	ImageJPG  string = "image/jpg"
 	ImageJPEG string = "image/jpeg"
 	ImagePNG  string = "image/png"
+
+	// config const gRPC Client
+	GrpcAuth string = "auth"
 )

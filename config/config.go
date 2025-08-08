@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"log"
 	"os"
@@ -11,10 +12,12 @@ import (
 
 	"github.com/alfisar/jastip-import/database"
 	"github.com/alfisar/jastip-import/domain"
+	"github.com/alfisar/jastip-import/helpers/consts"
 	"github.com/go-redis/redis/v8"
 	"github.com/joho/godotenv"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
+	"google.golang.org/grpc"
 
 	"gopkg.in/gomail.v2"
 	"gorm.io/gorm"
@@ -52,6 +55,7 @@ func Init() {
 				Hash: domain.Hash{
 					Key: os.Getenv("HASH_KEY"),
 				},
+				GRPC: iniGRPC(),
 			}
 		},
 	}
@@ -127,4 +131,17 @@ func NewConnMinio() (*minio.Client, string) {
 	}
 
 	return minioClient, bucketName
+}
+
+func iniGRPC() (result map[string]*grpc.ClientConn) {
+	gRPCAddr := strings.Split(os.Getenv("GRPC_ADDR"), ",")
+	for _, v := range gRPCAddr {
+		conn, err := grpc.Dial(v, grpc.WithInsecure())
+		if err != nil {
+			log.Fatalln("Cannot connect GRPC : " + err.Error())
+		}
+		defer conn.Close()
+		result[consts.GrpcAuth] = conn
+	}
+	return
 }
