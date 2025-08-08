@@ -31,8 +31,8 @@ type OrderListResponse struct {
 	Invoice string            `json:"invoice" gorm:"invoice"`
 	Price   float32           `json:"price" gorm:"price"`
 	Status  int               `json:"status" gorm:"status"`
-	Travel  TravelSchResponse `json:"travel_schedule" gorm:"travel_schedule"`
-	Address AddressOrder      `json:"address" gorm:"address"`
+	Travel  TravelSchResponse `json:"travel_schedule" gorm:"foreignKey:TravelID;references:ID"`
+	Address AddressOrder      `json:"address" gorm:"foreignKey:AddressID;references:ID"`
 }
 
 type OrderData struct {
