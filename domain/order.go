@@ -13,15 +13,17 @@ type OrderRequest struct {
 }
 
 type OrderOneResponse struct {
-	ID            int               `json:"id" gorm:"id"`
+	ID            int               `json:"id" gorm:"primaryKey; id"`
 	Invoice       string            `json:"invoice" gorm:"invoice"`
+	AddressID     int               `json:"-" gorm:"address_id"`
+	TravelID      int               `json:"-" gorm:"travel_schedule_id"`
 	Price         float32           `json:"price" gorm:"price"`
 	Status        int               `json:"status" gorm:"status"`
 	PaymentStatus int               `json:"payment_satatus" gorm:"payment_satatus"`
 	PaymentMethod int               `json:"payment_status" gorm:"payment_status"`
-	Travel        TravelSchResponse `json:"travel_schedule" gorm:"travel_schedule"`
-	Address       AddressOrder      `json:"address" gorm:"address"`
-	Product       []OrderDetail     `json:"products"`
+	Travel        TravelSchResponse `json:"travel_schedule" gorm:"foreignKey:TravelID;references:ID"`
+	Address       AddressOrder      `json:"address" gorm:"foreignKey:AddressID;references:ID"`
+	Product       []OrderDetail     `json:"products" gorm:"foreignKey:OrderID;references:ID"`
 }
 
 type OrderListResponse struct {
