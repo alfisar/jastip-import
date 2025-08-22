@@ -134,6 +134,7 @@ func NewConnMinio() (*minio.Client, string) {
 }
 
 func iniGRPC() (result map[string]*grpc.ClientConn) {
+	result = make(map[string]*grpc.ClientConn, 0)
 	gRPCAddr := strings.Split(os.Getenv("GRPC_ADDR"), ",")
 	for _, v := range gRPCAddr {
 		conn, err := grpc.Dial(v, grpc.WithInsecure())
