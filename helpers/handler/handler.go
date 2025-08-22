@@ -219,6 +219,7 @@ func HandlerParamProducts(c *fiber.Ctx) (domain.Params, error) {
 }
 
 func HandlerParamOrders(c *fiber.Ctx) (domain.Params, error) {
+	var status int
 	errMessage := ""
 
 	page, err := strconv.Atoi(c.Query("page"))
@@ -236,14 +237,18 @@ func HandlerParamOrders(c *fiber.Ctx) (domain.Params, error) {
 
 	}
 
-	status, err := strconv.Atoi(c.Query("status"))
-	if err != nil {
-		if errMessage != "" {
-			errMessage += ", status tidak valid"
-		} else {
-			errMessage = "status tidak valid"
+	if c.Query("status") != "" {
+		statuss, err := strconv.Atoi(c.Query("status"))
+		if err != nil {
+			if errMessage != "" {
+				errMessage += ", status tidak valid"
+			} else {
+				errMessage = "status tidak valid"
+			}
+
 		}
 
+		status = statuss
 	}
 
 	if errMessage != "" {
