@@ -38,7 +38,7 @@ type OrderListResponse struct {
 type OrderData struct {
 	ID            int     `json:"id" gorm:"primaryKey; id"`
 	BuyerID       int     `json:"buyer_id" gorm:"column:buyer_id"`
-	TravelID      int     `json:"travel_schedule_id" gorm:"column:travel_schedule_id"`
+	TravelID      int     `json:"travel_schedule_id" gorm:"column:traveler_schedule_id"`
 	Invoice       string  `json:"invoice" gorm:"column:invoice"`
 	AddressID     int     `json:"address_id" gorm:"column:address_id"`
 	Price         float32 `json:"price" gorm:"column:price"`
