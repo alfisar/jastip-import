@@ -43,8 +43,8 @@ type OrderData struct {
 	AddressID     int     `json:"address_id" gorm:"column:address_id"`
 	Price         float32 `json:"price" gorm:"column:price"`
 	Status        int     `json:"status" gorm:"column:status"`
-	PaymentStatus int     `json:"payment_satatus" gorm:"column:payment_satatus"`
-	PaymentMethod int     `json:"payment_status" gorm:"column:payment_status"`
+	PaymentStatus int     `json:"payment_status" gorm:"column:payment_status"`
+	PaymentMethod int     `json:"payment_method" gorm:"column:payment_method"`
 }
 
 type OrderDetail struct {
