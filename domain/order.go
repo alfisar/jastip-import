@@ -7,8 +7,8 @@ type OrderRequest struct {
 	AddressID     int           `json:"address_id" gorm:"address_id"`
 	Price         float32       `json:"price" gorm:"price"`
 	Status        int           `json:"status" gorm:"status"`
-	PaymentStatus int           `json:"payment_satatus" gorm:"payment_satatus"`
-	PaymentMethod int           `json:"payment_status" gorm:"payment_status"`
+	PaymentStatus int           `json:"payment_status" gorm:"payment_status"`
+	PaymentMethod int           `json:"payment_method" gorm:"payment_method"`
 	Product       []ProductData `json:"products"`
 }
 
