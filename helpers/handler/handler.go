@@ -218,6 +218,46 @@ func HandlerParamProducts(c *fiber.Ctx) (domain.Params, error) {
 	}, nil
 }
 
+func HandlerParamOrders(c *fiber.Ctx) (domain.Params, error) {
+	errMessage := ""
+
+	page, err := strconv.Atoi(c.Query("page"))
+	if err != nil {
+		errMessage = "page tidak valid"
+	}
+
+	limit, err := strconv.Atoi(c.Query("limit"))
+	if err != nil {
+		if errMessage != "" {
+			errMessage += ", limit tidak valid"
+		} else {
+			errMessage = "limit tidak valid"
+		}
+
+	}
+
+	status, err := strconv.Atoi(c.Query("status"))
+	if err != nil {
+		if errMessage != "" {
+			errMessage += ", status tidak valid"
+		} else {
+			errMessage = "status tidak valid"
+		}
+
+	}
+
+	if errMessage != "" {
+		return domain.Params{}, fmt.Errorf(errMessage)
+	}
+
+	return domain.Params{
+		Page:   page,
+		Limit:  limit,
+		Search: c.Query("search"),
+		Status: status,
+	}, nil
+}
+
 func HandlerUpdate(c *fiber.Ctx) (map[string]any, error) {
 	request := map[string]any{}
 	errData := c.BodyParser(&request)
