@@ -254,3 +254,13 @@ func HandlerPathID(c *fiber.Ctx) (int, error) {
 
 	return id, nil
 }
+
+func HandlerPostOrder(c *fiber.Ctx) (domain.OrderRequest, error) {
+	request := domain.OrderRequest{}
+	errData := c.BodyParser(&request)
+	if errData != nil {
+		return request, errData
+	}
+
+	return request, nil
+}
