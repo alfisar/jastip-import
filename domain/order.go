@@ -32,7 +32,7 @@ type OrderListResponse struct {
 	Price              float32           `json:"price" gorm:"column:price"`
 	Status             int               `json:"status" gorm:"column:status"`
 	AddressID          int               `json:"-" gorm:"column:address_id"`
-	TravelerScheduleID int               `json:"-" gorm:"column:travel_schedule_id"`
+	TravelerScheduleID int               `json:"-" gorm:"column:traveler_schedule_id"`
 	Travel             TravelSchResponse `json:"travel_schedule" gorm:"foreignKey:TravelerScheduleID;references:ID"`
 	Address            AddressOrder      `json:"address" gorm:"foreignKey:AddressID;references:ID"`
 }
