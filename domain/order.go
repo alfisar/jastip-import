@@ -13,17 +13,17 @@ type OrderRequest struct {
 }
 
 type OrderOneResponse struct {
-	ID            int               `json:"id" gorm:"column:primaryKey; id"`
-	Invoice       string            `json:"invoice" gorm:"column:invoice"`
-	AddressID     int               `json:"-" gorm:"column:address_id"`
-	TravelID      int               `json:"-" gorm:"column:travel_schedule_id"`
-	Price         float32           `json:"price" gorm:"column:price"`
-	Status        int               `json:"status" gorm:"column:status"`
-	PaymentStatus int               `json:"payment_satatus" gorm:"column:payment_satatus"`
-	PaymentMethod int               `json:"payment_status" gorm:"column:payment_status"`
-	Travel        TravelSchResponse `json:"travel_schedule" gorm:"foreignKey:TravelID;references:ID"`
-	Address       AddressOrder      `json:"address" gorm:"foreignKey:AddressID;references:ID"`
-	Product       []OrderDetail     `json:"products" gorm:"foreignKey:OrderID;references:ID"`
+	ID                 int               `json:"id" gorm:"column:primaryKey; id"`
+	Invoice            string            `json:"invoice" gorm:"column:invoice"`
+	AddressID          int               `json:"-" gorm:"column:address_id"`
+	TravelerScheduleID int               `json:"-" gorm:"column:traveler_schedule_id"`
+	Price              float32           `json:"price" gorm:"column:price"`
+	Status             int               `json:"status" gorm:"column:status"`
+	PaymentStatus      int               `json:"payment_satatus" gorm:"column:payment_satatus"`
+	PaymentMethod      int               `json:"payment_status" gorm:"column:payment_status"`
+	Travel             TravelSchResponse `json:"travel_schedule" gorm:"foreignKey:TravelerScheduleID;references:ID"`
+	Address            AddressOrder      `json:"address" gorm:"foreignKey:AddressID;references:ID"`
+	Product            []OrderDetail     `json:"products" gorm:"foreignKey:OrderID;references:ID"`
 }
 
 type OrderListResponse struct {
