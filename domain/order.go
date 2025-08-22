@@ -27,12 +27,14 @@ type OrderOneResponse struct {
 }
 
 type OrderListResponse struct {
-	ID      int               `json:"id" gorm:"column:id"`
-	Invoice string            `json:"invoice" gorm:"column:invoice"`
-	Price   float32           `json:"price" gorm:"column:price"`
-	Status  int               `json:"status" gorm:"column:status"`
-	Travel  TravelSchResponse `json:"travel_schedule" gorm:"foreignKey:TravelID;references:ID"`
-	Address AddressOrder      `json:"address" gorm:"foreignKey:AddressID;references:ID"`
+	ID        int               `json:"id" gorm:"column:id"`
+	Invoice   string            `json:"invoice" gorm:"column:invoice"`
+	Price     float32           `json:"price" gorm:"column:price"`
+	Status    int               `json:"status" gorm:"column:status"`
+	AddressID int               `json:"-" gorm:"column:address_id"`
+	TravelID  int               `json:"-" gorm:"column:travel_schedule_id"`
+	Travel    TravelSchResponse `json:"travel_schedule" gorm:"foreignKey:TravelID;references:ID"`
+	Address   AddressOrder      `json:"address" gorm:"foreignKey:AddressID;references:ID"`
 }
 
 type OrderData struct {
