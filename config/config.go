@@ -141,7 +141,7 @@ func iniGRPC() (result map[string]*grpc.ClientConn) {
 		if err != nil {
 			log.Fatalln("Cannot connect GRPC : " + err.Error())
 		}
-		defer conn.Close()
+
 		result[consts.GrpcAuth] = conn
 	}
 	return
