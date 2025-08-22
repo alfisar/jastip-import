@@ -62,7 +62,7 @@ type OrderDetail struct {
 }
 
 type AddressOrder struct {
-	Id            int    `gorm:"primaryKey; column:id" json:"id"`
+	ID            int    `gorm:"primaryKey; column:id" json:"id"`
 	UserID        int    `gorm:"column:user_id" json:"user_id"`
 	ReceiverName  string `gorm:"column:receiver_name" json:"receiver_name"`
 	ReceiverPhone string `gorm:"column:receiver_phone" json:"receiver_phone"`
