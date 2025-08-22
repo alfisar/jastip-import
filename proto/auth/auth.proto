@@ -30,6 +30,9 @@ message ResponseAddressByID {
 	string Street      = 3;
 	string City        = 4;
 	string District    = 5;
-	string SUbDistrict = 6;
+	string SubDistrict = 6;
 	string PostalCode  = 7;
+    string ReceiverName = 8;
+    string ReceiverPhone = 9;
+    string Tag = 10;
 }
