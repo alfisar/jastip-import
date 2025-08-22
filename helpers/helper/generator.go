@@ -8,6 +8,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
+	randMath "math/rand"
 	"time"
 
 	"github.com/alfisar/jastip-import/domain"
@@ -134,4 +135,15 @@ func Unpad(data []byte) []byte {
 	length := len(data)
 	unpadding := int(data[length-1])
 	return data[:(length - unpadding)]
+}
+
+// generate invoice data
+func GenerateInvoiceNumber() string {
+	randMath.Seed(time.Now().UnixNano())
+
+	// Prefix INV + tanggal (YYYYMMDD) + random 4 digit
+	return fmt.Sprintf("INV-%s-%04d",
+		time.Now().Format("20060102"),
+		randMath.Intn(10000),
+	)
 }
