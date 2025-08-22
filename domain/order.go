@@ -13,7 +13,7 @@ type OrderRequest struct {
 }
 
 type OrderOneResponse struct {
-	ID                 int               `json:"id" gorm:"column:primaryKey; id"`
+	ID                 int               `json:"id" gorm:"column:id"`
 	Invoice            string            `json:"invoice" gorm:"column:invoice"`
 	AddressID          int               `json:"-" gorm:"column:address_id"`
 	TravelerScheduleID int               `json:"-" gorm:"column:traveler_schedule_id"`
