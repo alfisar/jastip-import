@@ -49,6 +49,8 @@ func NewConnSQL() (*gorm.DB, error) {
 func NewConnSQLs(data []string) (map[string]*gorm.DB, error) {
 	result := make(map[string]*gorm.DB, 0)
 	for _, v := range data {
+		fmt.Println("DB_USE : " + os.Getenv("DB_USE_"+v))
+		fmt.Println("DB_HOST : " + os.Getenv("DB_HOST_"+v))
 		// mendapatkan data DB dari ENV
 		DBHost := os.Getenv("DB_HOST_" + v)
 		DBUser := os.Getenv("DB_USER_" + v)

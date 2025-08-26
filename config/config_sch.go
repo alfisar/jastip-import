@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"strings"
 
 	"log"
@@ -35,8 +34,6 @@ func InitSch() {
 
 // Function to initialize DB
 func initDBSCH() map[string]*gorm.DB {
-	fmt.Println("DB_USE : " + os.Getenv("DB_USE"))
-	fmt.Println("DB_HOST : " + os.Getenv("DB_HOST"))
 	switch os.Getenv("DB_USE") {
 	case "MySQL":
 		if os.Getenv("DB_DESTINATION") == "" {
