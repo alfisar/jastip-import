@@ -48,4 +48,8 @@ const (
 
 	// config const gRPC Client
 	GrpcAuth string = "auth"
+
+	// config const DB Name
+	DBAuth string = "AUTH"
+	DBCore string = "CORE"
 )

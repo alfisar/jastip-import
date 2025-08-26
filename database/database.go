@@ -46,6 +46,44 @@ func NewConnSQL() (*gorm.DB, error) {
 	return db, nil
 }
 
+func NewConnSQLs(data []string) (map[string]*gorm.DB, error) {
+	result := make(map[string]*gorm.DB, 0)
+	for _, v := range data {
+		// mendapatkan data DB dari ENV
+		DBHost := os.Getenv("DB_HOST_" + v)
+		DBUser := os.Getenv("DB_USER_" + v)
+		DBPass := os.Getenv("DB_PASS_" + v)
+		DBPort := os.Getenv("DB_PORT_" + v)
+		DBName := os.Getenv("DB_NAME_" + v)
+
+		if DBHost == "" || DBUser == "" || DBName == "" || DBPass == "" || DBPort == "" {
+			return nil, fmt.Errorf("Failed Connect DB : Invalid Data DB")
+		}
+
+		// membuat koneksi ke DB SQL
+		connString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DBUser, DBPass, DBHost, DBPort, DBName)
+		db, err := gorm.Open(mysql.Open(connString), &gorm.Config{})
+		if err != nil {
+			return nil, fmt.Errorf("Failed Connect DB : " + err.Error())
+		}
+
+		sqlDB, err := db.DB()
+		if err != nil {
+			return nil, fmt.Errorf("Failed Connect DB : " + err.Error())
+		}
+
+		// menset data max idle connection, max open connection, dan max lifetime connection
+		sqlDB.SetMaxIdleConns(10)
+		sqlDB.SetMaxOpenConns(100)
+		sqlDB.SetConnMaxLifetime(time.Hour)
+
+		result[v] = db
+	}
+
+	fmt.Println("Success")
+	return result, nil
+}
+
 func NewDatabaseRedis() (map[string]*redis.Client, error) {
 	// mendapatkan data redis dari env
 	fmt.Println("starting redis....")

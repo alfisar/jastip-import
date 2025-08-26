@@ -18,6 +18,10 @@ type Config struct {
 	GRPC    map[string]*grpc.ClientConn
 }
 
+type ConfigSch struct {
+	DBSql map[string]*gorm.DB
+}
+
 type Minio struct {
 	Client     *minio.Client
 	BucketName string
